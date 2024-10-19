@@ -135,20 +135,19 @@ const Admin = () => {
                     <td className="px-6 py-4 whitespace-nowrap">{user.NAME}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{user.ID}</td>
                     {Array.from({ length: 30 }, (_, index) => {
-                      const questionKey = `MCQ0${index + 1}`; // Construct the key as MCQ01, MCQ02, etc.
+                      const questionKey =
+                        index + 1 < 10 ? `MCQ0${index + 1}` : `MCQ${index + 1}`; // Pad with 0 only for single-digit numbers
                       return (
                         <td
                           key={questionKey}
                           className="px-6 py-4 whitespace-nowrap"
                         >
                           {user[questionKey]}{" "}
-                          {/* This will access the correct property */}
                         </td>
                       );
                     })}
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {new Date(user.timestamp).toLocaleString()}{" "}
-                      {/* Format the timestamp */}
+                      {new Date(user.timestamp).toLocaleString()}
                     </td>
                   </tr>
                 ))}

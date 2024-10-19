@@ -56,6 +56,21 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // Validate that all questions have been answered
+    const allQuestionsAnswered = Object.keys(formData).every((key) => {
+      if (key.startsWith("question")) {
+        return formData[key] !== ""; // Ensure no question is empty
+      }
+      return true;
+    });
+
+    if (!allQuestionsAnswered) {
+      alert("Please answer all the questions before submitting.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://examregistrayion-backend.onrender.com/api/register",
@@ -518,6 +533,7 @@ const Register = () => {
             >
               <label className="block text-gray-700 font-medium">
                 {question.label}
+                <span className="text-red-500"> *</span>
               </label>
               <div className="flex flex-col gap-2 mt-2">
                 {question.options.map((option, idx) => (
@@ -554,14 +570,14 @@ const Register = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-md">
             <h2 className="text-2xl font-semibold mb-4">
-              THANK YOU FOR PARTICIPATION!
+              THANK YOU FOR YOUR PARTICIPATION!
             </h2>
             <div className="flex justify-end">
               <Button
                 onClick={handleModalClose}
                 className="px-4 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               >
-                Close
+                CLOSE
               </Button>
             </div>
           </div>
