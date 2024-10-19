@@ -11,7 +11,7 @@ const Admin = () => {
   const getUserData = async () => {
     setLoading(true); // Show loader during API call
     try {
-      const response = await axios.get("https://examregistrayion-backend.onrender.com/api/users");
+      const response = await axios.get("http://localhost:5000/api/users");
 
       if (response.status === 200) {
         const users = response.data.map((user, index) => ({
@@ -38,8 +38,11 @@ const Admin = () => {
   const handleExportToExcel = () => {
     const filename = "userData.xlsx";
 
-    // Convert user data into a worksheet
-    const ws = XLSX.utils.json_to_sheet(userData);
+    // Filter out the fields object_id, _v, and index from userData
+    const filteredData = userData.map(({ _id, __v, index, ...rest }) => rest);
+
+    // Convert the filtered data into a worksheet
+    const ws = XLSX.utils.json_to_sheet(filteredData);
 
     // Create a new workbook
     const wb = XLSX.utils.book_new();
@@ -56,6 +59,41 @@ const Admin = () => {
     getUserData(); // Re-fetch the data from the API
   };
 
+  const tableHeader = [
+    { header: "Name" },
+    { header: "ID" },
+    { header: "Que 1" },
+    { header: "Que 2" },
+    { header: "Que 3" },
+    { header: "Que 4" },
+    { header: "Que 5" },
+    { header: "Que 6" },
+    { header: "Que 7" },
+    { header: "Que 8" },
+    { header: "Que 9" },
+    { header: "Que 10" },
+    { header: "Que 11" },
+    { header: "Que 12" },
+    { header: "Que 13" },
+    { header: "Que 14" },
+    { header: "Que 15" },
+    { header: "Que 16" },
+    { header: "Que 17" },
+    { header: "Que 18" },
+    { header: "Que 19" },
+    { header: "Que 20" },
+    { header: "Que 21" },
+    { header: "Que 22" },
+    { header: "Que 23" },
+    { header: "Que 24" },
+    { header: "Que 25" },
+    { header: "Que 26" },
+    { header: "Que 27" },
+    { header: "Que 28" },
+    { header: "Que 29" },
+    { header: "Que 30" },
+  ];
+
   return (
     <>
       {loading ? (
@@ -66,7 +104,8 @@ const Admin = () => {
             <h2 className="text-3xl font-semibold">User Data</h2>
             <div className="flex items-center gap-4">
               <Button onClick={handleExportToExcel}>Export to Excel</Button>
-              <Button onClick={handleRefresh}>Refresh Data</Button> {/* Refresh Button */}
+              <Button onClick={handleRefresh}>Refresh Data</Button>{" "}
+              {/* Refresh Button */}
             </div>
           </div>
           {loading ? (
@@ -75,39 +114,14 @@ const Admin = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Spell the word: An unexpected or astonishing event
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Spell the word: An animal that lives in the ocean
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Which word is spelled correctly?
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Correct spelling of a two-wheeled vehicle
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Opposite of "hot"
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Music Instrument spelling
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Add the missing letter in "ACOMPLISHMENT"
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Remove extra letter from "APPETITTE"
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Find the misspelt word in the sentence
-                  </th>
+                  {tableHeader.map((data, index) => (
+                    <th
+                      key={index}
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      {data.header}
+                    </th>
+                  ))}
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Timestamp
                   </th>
@@ -116,39 +130,22 @@ const Admin = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {userData.map((user) => (
                   <tr key={user._id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.name}
-                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
+                    {Array.from({ length: 30 }, (_, index) => {
+                      const questionKey = `que_${index + 1}`;
+                      return (
+                        <td
+                          key={questionKey}
+                          className="px-6 py-4 whitespace-nowrap"
+                        >
+                          {user[questionKey]}
+                        </td>
+                      );
+                    })}
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question2}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question3}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question4}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question5}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question6}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question7}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question8}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.question9}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {new Date(user.timestamp).toLocaleString()}
+                      {new Date(user.timestamp).toLocaleString()}{" "}
+                      {/* Format the timestamp */}
                     </td>
                   </tr>
                 ))}

@@ -9,6 +9,7 @@ import { useState } from "react";
 import Register from "./pages/Register";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
+import Logo from "./pages/Logo";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,6 +25,7 @@ function App() {
           path="/admin"
           element={isAuthenticated ? <Admin /> : <Navigate to="/login" />}
         />
+        <Route path="/logo" element={<Logo />} />
       </Routes>
     </Router>
   );
