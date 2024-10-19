@@ -11,7 +11,9 @@ const Admin = () => {
   const getUserData = async () => {
     setLoading(true); // Show loader during API call
     try {
-      const response = await axios.get("http://localhost:5000/api/users");
+      const response = await axios.get(
+        "https://examregistrayion-backend.onrender.com/api/users"
+      );
 
       if (response.status === 200) {
         const users = response.data.map((user, index) => ({
@@ -62,36 +64,36 @@ const Admin = () => {
   const tableHeader = [
     { header: "Name" },
     { header: "ID" },
-    { header: "Que 1" },
-    { header: "Que 2" },
-    { header: "Que 3" },
-    { header: "Que 4" },
-    { header: "Que 5" },
-    { header: "Que 6" },
-    { header: "Que 7" },
-    { header: "Que 8" },
-    { header: "Que 9" },
-    { header: "Que 10" },
-    { header: "Que 11" },
-    { header: "Que 12" },
-    { header: "Que 13" },
-    { header: "Que 14" },
-    { header: "Que 15" },
-    { header: "Que 16" },
-    { header: "Que 17" },
-    { header: "Que 18" },
-    { header: "Que 19" },
-    { header: "Que 20" },
-    { header: "Que 21" },
-    { header: "Que 22" },
-    { header: "Que 23" },
-    { header: "Que 24" },
-    { header: "Que 25" },
-    { header: "Que 26" },
-    { header: "Que 27" },
-    { header: "Que 28" },
-    { header: "Que 29" },
-    { header: "Que 30" },
+    { header: "MCQ_1" },
+    { header: "MCQ_2" },
+    { header: "MCQ_3" },
+    { header: "MCQ_4" },
+    { header: "MCQ_5" },
+    { header: "MCQ_6" },
+    { header: "MCQ_7" },
+    { header: "MCQ_8" },
+    { header: "MCQ_9" },
+    { header: "MCQ_10" },
+    { header: "MCQ_11" },
+    { header: "MCQ_12" },
+    { header: "MCQ_13" },
+    { header: "MCQ_14" },
+    { header: "MCQ_15" },
+    { header: "MCQ_16" },
+    { header: "MCQ_17" },
+    { header: "MCQ_18" },
+    { header: "MCQ_19" },
+    { header: "MCQ_20" },
+    { header: "MCQ_21" },
+    { header: "MCQ_22" },
+    { header: "MCQ_23" },
+    { header: "MCQ_24" },
+    { header: "MCQ_25" },
+    { header: "MCQ_26" },
+    { header: "MCQ_27" },
+    { header: "MCQ_28" },
+    { header: "MCQ_29" },
+    { header: "MCQ_30" },
   ];
 
   return (
@@ -130,16 +132,17 @@ const Admin = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {userData.map((user) => (
                   <tr key={user._id}>
-                    <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{user.NAME}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{user.ID}</td>
                     {Array.from({ length: 30 }, (_, index) => {
-                      const questionKey = `que_${index + 1}`;
+                      const questionKey = `MCQ0${index + 1}`; // Construct the key as MCQ01, MCQ02, etc.
                       return (
                         <td
                           key={questionKey}
                           className="px-6 py-4 whitespace-nowrap"
                         >
-                          {user[questionKey]}
+                          {user[questionKey]}{" "}
+                          {/* This will access the correct property */}
                         </td>
                       );
                     })}

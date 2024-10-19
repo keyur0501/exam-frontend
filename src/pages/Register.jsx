@@ -58,7 +58,7 @@ const Register = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/register",
+        "https://examregistrayion-backend.onrender.com/api/register",
         formData
       );
       if (response.status === 201) {
