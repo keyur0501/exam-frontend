@@ -57,20 +57,6 @@ const Register = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Validate that all questions have been answered
-    const allQuestionsAnswered = Object.keys(formData).every((key) => {
-      if (key.startsWith("question")) {
-        return formData[key] !== ""; // Ensure no question is empty
-      }
-      return true;
-    });
-
-    if (!allQuestionsAnswered) {
-      alert("Please answer all the questions before submitting.");
-      setIsLoading(false);
-      return;
-    }
-
     try {
       const response = await axios.post(
         "https://examregistrayion-backend.onrender.com/api/register",
