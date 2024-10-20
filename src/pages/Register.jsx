@@ -480,7 +480,7 @@ const Register = () => {
                 "D. MUSSLE",
                 "E. NONE OF THE ABOVE",
               ],
-              name: "question25",
+              name: "question26",
             },
             {
               label: "MCQ27",
@@ -491,7 +491,7 @@ const Register = () => {
                 "D. IODEEN",
                 "E. NONE OF THE ABOVE",
               ],
-              name: "question26",
+              name: "question27",
             },
             {
               label: "MCQ28",
@@ -502,7 +502,7 @@ const Register = () => {
                 "D. WHETSTONE",
                 "E. NONE OF THE ABOVE",
               ],
-              name: "question27",
+              name: "question28",
             },
             {
               label: "MCQ29",
@@ -513,7 +513,7 @@ const Register = () => {
                 "D. RHIZZOM",
                 "E. NONE OF THE ABOVE",
               ],
-              name: "question28",
+              name: "question29",
             },
             {
               label: "MCQ30",
@@ -524,7 +524,7 @@ const Register = () => {
                 "D. LODESTAR",
                 "E. NONE OF THE ABOVE",
               ],
-              name: "question29",
+              name: "question30",
             },
           ].map((question, index) => (
             <div
