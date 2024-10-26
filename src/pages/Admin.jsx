@@ -12,7 +12,9 @@ const Admin = () => {
     setLoading(true); // Show loader during API call
     try {
       const response = await axios.get(
-        "https://examregistrayion-backend.onrender.com/api/users"
+        "https://examregistrayion-backend.onrender.com/api/users/jaipur"
+        // "https://examregistrayion-backend.onrender.com/api/users/bhopal"
+        // "http://localhost:5000/api/users/jaipur"
       );
 
       if (response.status === 200) {

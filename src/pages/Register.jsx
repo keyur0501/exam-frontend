@@ -59,7 +59,11 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://examregistrayion-backend.onrender.com/api/register",
+        "https://examregistrayion-backend.onrender.com/api/register/jaipur",
+        // "https://examregistrayion-backend.onrender.com/api/register/bhopal",
+
+        // "http://localhost:5000/api/register/jaipur",
+
         formData
       );
       if (response.status === 201) {
@@ -128,7 +132,7 @@ const Register = () => {
       {/* Mumbai Regional Finale Section */}
       <div className="bg-white w-full max-w-[700px] p-6 mb-6 shadow-md rounded-lg">
         <h2 className="text-xl font-semibold text-pink-600">
-          Mumbai Regional Finale - Qualifier Round
+        Jaipur Regional Finale - Qualifier Round
         </h2>
         <p className="text-sm text-gray-600 mt-2">
           SBI Life Spell Bee 2024, in association with Mirchi – India’s biggest
